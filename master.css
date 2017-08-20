@@ -1,0 +1,20 @@
+/*v2 Updated 2.28.15*/
+
+.wait > .stop {
+	display: none;
+}
+
+.work > .start {
+	display: none;
+}
+
+.header.work {
+	background-image: linear-gradient(30deg, #5D28B5 12%, transparent 12.5%, transparent 87%, #5D28B5 87.5%, #5D28B5),
+	linear-gradient(150deg, #5D28B5 12%, transparent 12.5%, transparent 87%, #5D28B5 87.5%, #5D28B5),
+	linear-gradient(30deg, #5D28B5 12%, transparent 12.5%, transparent 87%, #5D28B5 87.5%, #5D28B5),
+	linear-gradient(150deg, #5D28B5 12%, transparent 12.5%, transparent 87%, #5D28B5 87.5%, #5D28B5),
+	linear-gradient(60deg, #905BE8 25%, transparent 25.5%, transparent 75%, #905BE8 75%, #905BE8), 
+	linear-gradient(60deg, #905BE8 25%, transparent 25.5%, transparent 75%, #905BE8 75%, #905BE8);
+	background-size:80px 140px;
+	background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+}

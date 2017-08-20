@@ -1,0 +1,40 @@
+{
+  "name": "froot-extension",
+  "description": "This application will press several buttons for froot service",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": [ "tabs", "storage", "http://*/*","https://*/*" ],
+  "browser_action": {
+		"default_title": "Remaster App",
+		"default_icon": "icon_48.png",
+		"default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon_128.png",
+    "64": "icon_64.png",
+    "48": "icon_48.png",
+	"16": "icon_16.png"
+  },
+  "background": {
+	"page": "popup.html",
+    //"scripts": ["popup.js"],
+	"persistent": false
+  },
+  "content_scripts": [
+    {
+	  "matches": [
+	  "*://*.silktour.kz/online-gostinicy", 
+	  "*://silktour.kz/online-gostinicy", 
+	  "http://www.silktour.kz/online-gostinicy", 
+	  "http://silktour.kz/online-gostinicy",
+	  "https://kz.thefroot.com/",
+	  "http://kz.thefroot.com/",
+	  "*://kz.thefroot.com/*"
+	  ],
+      "js": ["master.js", "jquery-3.2.1.min.js"],
+	  "css": ["master.css"],
+	  "run_at" : "document_idle"
+    }
+  ],
+  "web_accessible_resources": ["congruent_pentagon.png", "icon_16.png"]
+}
