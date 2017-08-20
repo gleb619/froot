@@ -2,15 +2,10 @@
 
 	var root = this;
 	var app = {
-		/*timers: {
-			smallTimer: 1000,
-			timer: 7 * 60 * 1000,  // seven minutes
-			worker: 1 * 60 * 1000, // one minute
-		}*/
 		timers: {
 			smallTimer: 1000,
-			timer: 2 * 60 * 1000,  // seven minutes
-			worker: 15 * 1000, // one minute
+			timer: 7 * 60 * 1000,  		// seven minutes
+			worker: 1 * 60 * 1000, 	// one minute
 		},
 		debug: true
 	};
@@ -20,7 +15,8 @@
 		good: '#swiper-hero > div.swiper-wrapper > div > div > div.thumb-details > div.thumb-title > a',
 		wantBuyButton: '#__next > div > div > main > section > div.product-info > div > div.product-row > div.product-meta > div.product-controls > button',
 		mainPage: 'header > div > figure > a',
-		header: '#header'
+		header: '#header',
+		statusPane: '#__next > div > div > main > section > div.product-info > div > div.product-row > div.product-meta > div.product-controls > div.status'
 	};
 
 	// Use in node or in browser
@@ -81,6 +77,7 @@
 			var isDetalization = window.location.toString().indexOf("/product/") > -1;
 			var containsButton = $(selectors.wantBuyButton).length > 0;
 			var isButtonDisabled = $(selectors.wantBuyButton).hasClass('is-disabled');
+			var statusPane = $(selectors.statusPane).length > 0;
 			
 			if(amountOfGoods > 0 && !isDetalization){
 				console.info("Go to goods page");
@@ -95,6 +92,8 @@
 					console.info("Click main button");
 					click(selectors.wantBuyButton);	
 				}
+			} else if(isDetalization && statusPane){
+				console.info("We are engaged, awat 2 stage");
 			} else if(isDetalization){
 				console.info("Return to main page");
 				openPage('/');
@@ -115,6 +114,12 @@
 		$(selector).attr('id', id);
 		document.getElementById(id).click();
 		$(selector).removeAttr('id');
+		var timer = setTimeout(function() {
+			$(selectors.header).removeClass('work').addClass('work');
+			
+			clearTimeout(timer);
+			timer = null;
+		}, app.timers.smallTimer);
 	}
 	
 	function uid() {
