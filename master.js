@@ -7,7 +7,7 @@
 			timer: 7 * 60 * 1000,  		// seven minutes
 			worker: 1 * 60 * 1000, 	// one minute
 		},
-		debug: true
+		debug: false
 	};
 	
 	var selectors = {
