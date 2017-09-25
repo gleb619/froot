@@ -23,13 +23,12 @@
   "content_scripts": [
     {
 	  "matches": [
-	  "*://*.silktour.kz/online-gostinicy", 
-	  "*://silktour.kz/online-gostinicy", 
-	  "http://www.silktour.kz/online-gostinicy", 
-	  "http://silktour.kz/online-gostinicy",
-	  "https://kz.thefroot.com/",
-	  "http://kz.thefroot.com/",
-	  "*://kz.thefroot.com/*"
+  	  "https://kz.thefroot.com/",
+  	  "http://kz.thefroot.com/",
+      "*://kz.thefroot.com/*",
+      "https://marinatravel.kz/",
+      "http://marinatravel.kz/",
+  	  "*://marinatravel.kz/*"
 	  ],
       "js": ["master.js", "jquery-3.2.1.min.js"],
 	  "css": ["master.css"],
