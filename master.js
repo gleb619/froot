@@ -4,10 +4,11 @@
 	var app = {
 		timers: {
 			smallTimer: 1000,
-			timer: 7 * 60 * 1000,  		// seven minutes
-			worker: 1 * 60 * 1000, 	// one minute
+			timer: 5 * 60 * 1000,  	// five minutes
+			worker: 30 * 1000, 	// thirty seconds
 		},
-		debug: false
+		debug: false,
+		counter: 0
 	};
 	
 	var selectors = {
@@ -61,6 +62,11 @@
 			window.localStorage.setItem("reload-cycle", reloadCycle++);
 			location.reload();	
 		}, app.timers.timer); 
+
+		setInterval(function(){	
+			if(app.counter >= 10) app.counter = 0;
+			console.info('Left to wait: ', (10 - app.counter++));
+		}, (app.timers.timer * 0.10)); // 10% from normal timer
 	}
 	
 	function onWork(data){
@@ -78,6 +84,7 @@
 			var containsButton = $(selectors.wantBuyButton).length > 0;
 			var isButtonDisabled = $(selectors.wantBuyButton).hasClass('is-disabled');
 			var statusPane = $(selectors.statusPane).length > 0;
+			var isNotFroot = window.location.href.indexOf('marinatravel.kz') > -1;
 			
 			if(amountOfGoods > 0 && !isDetalization){
 				console.info("Go to goods page");
@@ -94,9 +101,9 @@
 				}
 			} else if(isDetalization && statusPane){
 				console.info("We are engaged, awat 2 stage");
-			} else if(isDetalization){
+			} else if(isDetalization || isNotFroot){
 				console.info("Return to main page");
-				openPage('/');
+				openPage('https://kz.thefroot.com/');
 			} else {
 				console.warn("Goods not found");
 			}
