@@ -1,5 +1,11 @@
 (function() {
 
+	function $$(selector, context) {
+	  context = context || document;
+	  var elements = context.querySelectorAll(selector);
+	  return Array.prototype.slice.call(elements);
+	}
+
 	var root = this;
 	var app = {
 		timers: {
@@ -19,6 +25,8 @@
 		header: '#header',
 		statusPane: '#__next > div > div > main > section > div.product-info > div > div.product-row > div.product-meta > div.product-controls > div.status'
 	};
+
+
 
 	// Use in node or in browser
 	if (typeof exports !== 'undefined') {
@@ -79,16 +87,33 @@
 		$(selectors.header).addClass('work');
 		
 		app.refreshIntervalId = setInterval(function(){			
-			var amountOfGoods = parseInt($(selectors.amountOfGoods).text().replace(/[^\d]+/, ""));
+			var list =  $$('.thumb-meta .users');
+			var amountOfGoods = list.length;//parseInt($(selectors.amountOfGoods).text().replace(/[^\d]+/, ""));
 			var isDetalization = window.location.toString().indexOf("/product/") > -1;
 			var containsButton = $(selectors.wantBuyButton).length > 0;
 			var isButtonDisabled = $(selectors.wantBuyButton).hasClass('is-disabled');
 			var statusPane = $(selectors.statusPane).length > 0;
 			var isNotFroot = window.location.href.indexOf('marinatravel.kz') > -1;
 			
+			if (amountOfGoods === 0){
+				amountOfGoods = parseInt($(selectors.amountOfGoods).text().replace(/[^\d]+/, ""));
+			}
+
 			if(amountOfGoods > 0 && !isDetalization){
 				console.info("Go to goods page");
-				click(selectors.good);
+
+				var v;
+				var maxValue = 0;
+				var maxIndex = 0;
+				for(var i = 0 ; i < list.length; i++){
+					v = parseInt(list[i].innerHTML.replace(/[^\d]+/, ""));
+					if (v > maxValue){
+						maxValue = v;
+						maxIndex = i;
+					}
+				}
+				var e = $$('.thumb.thumb--product:not(.no-auctions) .thumb-title .link')[maxIndex]
+				click2(e);
 			} else if(amountOfGoods > 1 && isDetalization && isButtonDisabled){
 				console.info("It's too late, we missed our chance");
 				click(selectors.good);
@@ -103,7 +128,7 @@
 				console.info("We are engaged, awat 2 stage");
 			} else if(isDetalization || isNotFroot){
 				console.info("Return to main page");
-				openPage('https://kz.thefroot.com/');
+				openPage('https://thefroot.com/');
 			} else {
 				console.warn("Goods not found");
 			}
@@ -121,6 +146,20 @@
 		$(selector).attr('id', id);
 		document.getElementById(id).click();
 		$(selector).removeAttr('id');
+		var timer = setTimeout(function() {
+			$(selectors.header).removeClass('work').addClass('work');
+			
+			clearTimeout(timer);
+			timer = null;
+		}, app.timers.smallTimer);
+	}
+
+	function click2(element){
+		element.click();
+		var id = uid();
+		element.id = id;
+		document.getElementById(id).click();
+		element.id = "";
 		var timer = setTimeout(function() {
 			$(selectors.header).removeClass('work').addClass('work');
 			
