@@ -8,42 +8,40 @@
 </head>
 <body class="hint">
 	<a id="open_new_page" class="button btn-block" role="button" href="https://kz.thefroot.com/" target='_newtab'>
-		<span>Открыть страницу</span>
+		<span>Open page</span>
 	</a>
-			
+
 	<br>
 	<br>
-	
+
 	<div class="panel">
 			<div class="panel-heading">
-				Настройки
+				Settings (1.2.0)
 			</div>
 			<div class="panel-body">
 				<form>
 					<div class="form-group center">
-						<button id="beginButton" type="button" class="wait">
+						<button id="begin_button" type="button" class="wait">
 							<span class="start">Start</span>
 							<span class="stop">Cancel</span>
 						</button>
 					</div>
-					
-					
-					<!--
-					<div class="form-group center">
-						<button id="acceptButton" type="button">
-							<span>Применить</span>
-						</button>
+					<div class="checkbox">
+						<input type="checkbox" id="last_good_enable" class="form-control" onchange="paramChanged(this.id, this.checked)">
+						<label>
+							<span>Take the last good</span>
+						</label>
 					</div>
-					<div class="form-group center">
-						<button id="dropButton" type="button" class="btn-danger">
-							<span>Сбросить</span>
-						</button>
+					<div class="checkbox">
+						<input type="checkbox" id="most_popular_enable" class="form-control" onchange="paramChanged(this.id, this.checked)">
+						<label>
+							<span>Take the most popular</span>
+						</label>
 					</div>
-					-->
 				</form>
 			</div>
 	</div>
-	
+
 	<!--
 	<div class="panel">
 			<div class="panel-heading">
@@ -53,12 +51,8 @@
 				<p id="log"></p>
 			</div>
 	</div>
-	
-	<!--
-	<div class="center">
-		<a id="siteHref" href="http://www.silktour.kz/" class="btn">Open silktour.kz</a>
-	</div>
 	-->
+
 </body>
 </html>
 
